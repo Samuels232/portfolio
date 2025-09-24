@@ -1,6 +1,17 @@
 import streamlit as st
 
 st.set_page_config(layout="wide")
+st.markdown("""
+    <style>
+        :root{
+            color-scheme: only dark;
+        }
+        body{
+            background-color: #0d0d0d !important;
+            color: #f1f1f1; !important;
+        }
+    </style>
+""",unsafe_allow_html=True)
 st.markdown(
     """
     <nav>
@@ -15,11 +26,17 @@ st.markdown(
         nav{
             display: flex;
             justify-content: space-between;
-            width: 100%;
             align-items: center;
             margin-bottom: 5%;
             background: linear-gradient(to bottom right, #2C003E, #000000);
             padding: 0px 5px;
+            position: fixed;
+            top: 3.5rem;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            z-index: 100%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
         }
         .nav-left{
             font-size: 30px;
@@ -45,11 +62,8 @@ st.markdown(
         }
         .nav-right a:hover{
             color: white;
-            background: green;
-            box-shadow: grey;
-        }
-        .nav-right a:first-child:hover{
-            border-radius: 15px 0 0 0;
+            background: grey;
+            box-shadow: 0 0 7px black;
         }
     """, unsafe_allow_html=True
 )
@@ -142,7 +156,7 @@ with top:
     st.title("About Me")
     st.markdown("""
         <div class="about-cuz">
-            <div class="ab-left"><img src="images/peak.jpg"></img></div>
+            <div class="ab-left"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/peak.jpg"></img></div>
             <div class="ab-middle">
             </div>
             <div class="ab-right">
@@ -153,7 +167,7 @@ with top:
                     experiences that linger. Wherever I step in, I strive to bring clarity, structure and undeniable value
                     </p>
                 </div>
-                <div class="ab">
+                <div class="ab ab-m">
                     <h2>What I Do</h2>
                     <p>I explore the edges of AI and web development, blending logic with creativity to build solutions
                      that actually matter. from functional we apps to experimental AI projects, I thrive on making ideas
@@ -172,17 +186,32 @@ with top:
         <style>
             .about-cuz{
                 display: flex;
+                gap: 20px;
             }
             .ab-left{
-                display: flex;
                 flex-basis: 40%;
+                position: relative;
+                width: 100%;
+                height: auto;
                 border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 6px 25px rgba(75,0,130,0.7);
+            }
+            .ab-left::after{
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 15px;
+                background: linear-gradient(to bottom right, rgba(44,0,62,0.6),rgba(255,255,255,0.1),rgba(44,0,62,0.7));
             }
             .ab-left img{
                 width: 100%;
-                border: 1px solid;
-                border-radius: inherit;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                border-radius: 15px;
             }
+            
             .ab-middle{
                 display: flex;
                 flex-basis: 5%;
@@ -191,13 +220,14 @@ with top:
                 display: flex;
                 flex-direction: column;
                 flex-basis: 55%;
-                linear-gradient: linear-gradient(to right, rgb(76, 76, 80), rgb(145, 139, 139));
+                linear-gradient: linear-gradient(to bottom right, #2C003E, #000000);
             }
             .ab{
                 background: linear-gradient(to bottom right, #2C003E, #000000);
                 border-radius: 12px;
                 padding: 0 15px;
                 margin: 30px 0 0 0;
+                box-shadow: 0 8px 30px rgba(88,24,69,0.5);
             }
             .ab h1{
                 font-style: Impact;
@@ -208,31 +238,29 @@ with top:
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
                 color: transparent;
-                font-size: 18px;
+                font-size: 19px;
                 font-style: Verdana;
             }
-            @media (max-width: 1024px) and (min-width: 360px){
+            .ab-m p{
+                background: linear-gradient(to top left, #3776AB,#FFD43B,#306998,#4B8BBE,#646464,#A9A9A9,#D3D3D3);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;
+                font-size: 19px;
+                font-style: Verdana;
+            }
+            @media (max-width: 1024px) and (min-width: 344px){
                 .about-cuz{
-                    display: flex;
                     flex-direction: column;
-                    height: 1300px;
                 }
                 .ab-left{
-                    display: flex;
-                    flex-basis: 55%;
-                    border: 1px solid;
-                    border-radius: 15px;
+                    flex-basis: auto;
+                    width: 100%;
                 }
                 .ab-left img{
-                    height: 100%;
-                    border: 1px solid;
-                    width: inherit;
-                    border: inherit;
-                    border-radius: inherit;
-                }
-                .ab-right{
-                    display: flex;
-                    flex-basis: 40%;
+                    width: 100%;
+                    height: auto;
                 }
                 
             }
