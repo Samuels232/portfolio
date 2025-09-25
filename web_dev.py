@@ -289,7 +289,7 @@ with portfolio:
                 </div>
             </div>
             <div class="work">
-                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ui2.jpg">
+                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ui3.jpg">
                 <div class="layer">
                     <h1>UI/UX Design</h1>
                     <p></p>
