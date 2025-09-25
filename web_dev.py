@@ -269,17 +269,70 @@ with top:
 
 portfolio = st.container()
 with portfolio:
+    for i in range(3):
+        st.write("")
     st.title("Portfolio")
     st.markdown("""
-        <div class="container">
+        <div class="portfolio">
             <div class="work">
                 <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ai1.jpg">
+                <div class="layer">
+                    <h1>Artificial Intelligence</h1>
+                    <p></p>
+                </div>
             </div>
             <div class="work">
                 <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/web1.jpg">
+                <div class="layer">
+                    <h1>Web Development</h1>
+                    <p></p>
+                </div>
             </div>
             <div class="work">
-                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ui.jpg">
+                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ui2.jpg">
+                <div class="layer">
+                    <h1>UI/UX Design</h1>
+                    <p></p>
+                </div>
             </div>
         </div>
+        <style>
+            .portfolio{
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+                grid-gap: 40px;
+                margin-top: 20px;
+            }
+            .work{
+                border-radius: 10px;
+                position: relative;
+                overflow: hidden;
+            }
+            .work img{
+                width: 100%;
+                border-radius: 10px;
+                display: block;
+            }
+            .layer{
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom right, rgba(44,0,62,0.6),rgba(255,255,255,0.1),rgba(44,0,62,0.7));
+                border-radius: 10px;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 0 40px;
+                text-align: center;
+                font-size: 14px
+            }
+            .layer h3{
+                font-weight: 500;
+                margin-bottom: 20px;
+            }
+        </style>
 """,unsafe_allow_html=True)
