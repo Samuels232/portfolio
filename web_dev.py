@@ -266,3 +266,20 @@ with top:
             }
         </style>
     """,unsafe_allow_html=True)
+
+portfolio = st.container()
+with portfolio:
+    st.title("Portfolio")
+    st.markdown("""
+        <div class="container">
+            <div class="work">
+                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ai1.jpg">
+            </div>
+            <div class="work">
+                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/web1.jpg">
+            </div>
+            <div class="work">
+                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ui.jpg">
+            </div>
+        </div>
+""",unsafe_allow_html=True)
