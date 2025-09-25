@@ -277,24 +277,30 @@ with portfolio:
             <div class="work">
                 <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ai1.jpg">
                 <div class="layer">
-                    <h1>Artificial Intelligence</h1>
-                    <p></p>
+                    <h3>Artificial Intelligence</h3>
+                    <p>I build practical AI solutions that merge intelligence with reusability. My goal is to create an 
+                    AI that feels less like a tool and more like a collaborator</p>
                 </div>
             </div>
             <div class="work">
-                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/web1.jpg">
+                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/webs.jpg">
                 <div class="layer">
-                    <h1>Web Development</h1>
-                    <p></p>
+                    <h3>Web Development</h3>
+                    <p>From front=end design to back-end logic, I build web solutions that balance creativity with 
+                    functionality. Every project aims to connect users effortlessly</p>
                 </div>
             </div>
             <div class="work">
-                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ui3.jpg">
+                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/uui3.jpg">
                 <div class="layer">
-                    <h1>UI/UX Design</h1>
-                    <p></p>
+                    <h3>UI/UX Design</h3>
+                    <p>UI/UX to me is about clarity and flow. I craft designs that not only look good but guide users 
+                    seamlessly through every interaction.</p>
                 </div>
             </div>
+        </div>
+        <div class="center-box">
+            <a href="https://github.com/Samuels232" class="glow-link">Project Repository</a>
         </div>
         <style>
             .portfolio{
@@ -312,10 +318,11 @@ with portfolio:
                 width: 100%;
                 border-radius: 10px;
                 display: block;
+                transition: transform 0.5s;
             }
             .layer{
                 width: 100%;
-                height: 100%;
+                height: 0;
                 background: linear-gradient(to bottom right, rgba(44,0,62,0.6),rgba(255,255,255,0.1),rgba(44,0,62,0.7));
                 border-radius: 10px;
                 position: absolute;
@@ -334,5 +341,47 @@ with portfolio:
                 font-weight: 500;
                 margin-bottom: 20px;
             }
+            .work:hover img{
+                transform: scale(1.1);
+            }
+            .work:hover .layer{
+                height: 100%;
+            }
+            .center-box{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 30px;
+            }
+            .glow-link {
+              display: inline-block;
+              font-size: 1.2rem;
+              font-weight: bold;
+              color: #fff !important;
+              text-decoration: none !important;
+              padding: 10px 20px;
+              border-radius: 40px;
+              background: linear-gradient(135deg, #2C003E, #000000);
+              box-shadow: 0 0 15px #2C003E, 0 0 25px #000000;
+              animation: glowing 2s infinite alternate;
+              transition: transform 0.3s ease;
+            }
+            
+            .glow-link:hover {
+              transform: scale(1.05);
+            }
+            
+            @keyframes glowing {
+              0% {
+                box-shadow: 0 0 5px #2C003E, 0 0 10px #000000;
+              }
+              50% {
+                box-shadow: 0 0 20px #2C003E, 0 0 40px #000000;
+              }
+              100% {
+                box-shadow: 0 0 10px #2C003E, 0 0 20px #000000;
+              }
+            }
+
         </style>
 """,unsafe_allow_html=True)
