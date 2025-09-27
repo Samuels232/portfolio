@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_js_eval import streamlit_js_eval
 
 st.set_page_config(layout="wide")
 st.markdown("""
@@ -17,7 +18,8 @@ st.markdown(
     <nav>
         <div class="nav-left"><span class="col">S</span>ammy's🥑</div>
         <div class="nav-right">
-            <a href="#about" class="fit fi">Home</a>
+            <a href="#" class="fit">Home</a>
+            <a href="#" class="fit">About</a>
             <a href="#" class="fit">Portfolio</a>
             <a href="#" class="fit">Contact</a>
         </div>
@@ -156,7 +158,7 @@ with top:
     st.title("About Me")
     st.markdown("""
         <div class="about-cuz">
-            <div class="ab-left"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/peak.jpg"></img></div>
+            <div class="ab-left"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/peak1.jpg"></img></div>
             <div class="ab-middle">
             </div>
             <div class="ab-right">
@@ -228,6 +230,10 @@ with top:
                 padding: 0 15px;
                 margin: 30px 0 0 0;
                 box-shadow: 0 8px 30px rgba(88,24,69,0.5);
+                transition: all 0.5s;
+            }
+            .ab:hover{
+                transform: scale(1.1);
             }
             .ab h1{
                 font-style: Impact;
@@ -283,10 +289,10 @@ with portfolio:
                 </div>
             </div>
             <div class="work">
-                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/webs.jpg">
+                <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/webs.png">
                 <div class="layer">
                     <h3>Web Development</h3>
-                    <p>From front=end design to back-end logic, I build web solutions that balance creativity with 
+                    <p>From front-end design to back-end logic, I build web solutions that balance creativity with 
                     functionality. Every project aims to connect users effortlessly</p>
                 </div>
             </div>
@@ -385,3 +391,42 @@ with portfolio:
 
         </style>
 """,unsafe_allow_html=True)
+
+bottom = st.container()
+with bottom:
+    for i in range(3):
+        st.write("")
+    st.title("Lets Talk")
+    st.markdown("""
+        <div class="Talk">
+            <div class="talk-left">
+                <div class="socials"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/git1.jpg"></div>
+                <div class="socials"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/wat1.png"></div>
+                <div class="socials"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ig.jpg"></div>
+                <div class="socials"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/snap.jpg"></div>
+            </div>
+            <div class="talk-right">
+                <form id="contactForm">
+                    <input type="text" id="name" placeholder="Your name" required>
+                    <textarea id="message" placeholder="Your message" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        
+        <style>
+            .Talk{
+                display: flex;
+            }
+            .talk-left{
+                flex-basis: 20%
+            }
+            .socials{
+                margin: 5px;
+            }
+            .socials img{
+                width: 70px;
+                height: 70px;
+            }
+        </style>
+    """,unsafe_allow_html=True)
