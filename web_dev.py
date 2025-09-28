@@ -4,13 +4,6 @@ import send_email as em
 st.set_page_config(layout="wide")
 st.markdown("""
     <style>
-        #MainMenu {visibility: hidden;}
-        header {visibility: hidden;}
-        footer {visibility: hidden;}
-    </style>
-""",unsafe_allow_html=True)
-st.markdown("""
-    <style>
         *{
             scroll-behavior: smooth !important;
         }
