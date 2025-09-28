@@ -1,7 +1,21 @@
 import streamlit as st
-from streamlit_js_eval import streamlit_js_eval
+import send_email as em
 
 st.set_page_config(layout="wide")
+st.markdown("""
+    <style>
+        #MainMenu {visibility: hidden;}
+        header {visibility: hidden;}
+        footer {visibility: hidden;}
+    </style>
+""",unsafe_allow_html=True)
+st.markdown("""
+    <style>
+        *{
+            scroll-behavior: smooth !important;
+        }
+    </style>
+""",unsafe_allow_html=True)
 st.markdown("""
     <style>
         :root{
@@ -13,62 +27,173 @@ st.markdown("""
         }
     </style>
 """,unsafe_allow_html=True)
-st.markdown(
-    """
-    <nav>
-        <div class="nav-left"><span class="col">S</span>ammy's🥑</div>
-        <div class="nav-right">
-            <a href="#" class="fit">Home</a>
-            <a href="#" class="fit">About</a>
-            <a href="#" class="fit">Portfolio</a>
-            <a href="#" class="fit">Contact</a>
-        </div>
-    </nav>
+st.markdown("""
+    <div class="desktop-nav">
+        <div class="navleft">Sammy's🥑</div>
+        <div class="navright">
+            <a href="#homie">Home</a>
+            <a href="#about">About</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+       </div>
+    </div>
+
+    <div class="mobile-nav">
+      <!-- Toggle (checkbox + label for hamburger) -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="hamburger">&#9776;</label>
+    
+      <div class="navleft">Sammy's🥑</div>
+      
+      <label for="nav-toggle" class="nav-overlay"></label>
+    
+      <div class="nav-menu">
+        <a href="#homie">Home</a>
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+
     <style>
-        nav{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5%;
-            background: linear-gradient(to bottom right, #2C003E, #000000);
-            padding: 0px 5px;
+        /* General reset */
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+          scroll-behavior: smooth; /* smooth scroll globally */
+        }
+        
+        /* Desktop nav */
+        .desktop-nav {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 30px;
+          background: linear-gradient(to right, #2C003E, #000000);
+          color: white;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 999;
+        }
+        
+        .desktop-nav .navleft {
+          font-size: 22px;
+          font-weight: bold;
+        }
+        
+        .desktop-nav .navright {
+          display: flex;
+          gap: 25px;
+        }
+        
+        .desktop-nav .navright a {
+          text-decoration: none;
+          color: white;
+          font-size: 16px;
+          transition: color 0.3s ease;
+        }
+        
+        .desktop-nav .navright a:hover {
+          color: #FFD43B; /* Python yellow for hover */
+        }
+        
+        /* Mobile nav hidden by default */
+        .mobile-nav {
+          display: none;
+        }
+        
+        /* Mobile nav styling */
+        @media (max-width: 768px) {
+          .desktop-nav {
+            display: none; /* hide desktop nav */
+          }
+        
+          .mobile-nav {
+            display: block;
             position: fixed;
-            top: 3.5rem;
+            top: 0;
             left: 0;
             width: 100%;
-            z-index: 9999;
-            z-index: 100%;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-        }
-        .nav-left{
-            font-size: 30px;
-        }
-        .col{
-            font-style: bold;
-            font-weight: 700;
-            font-size: 40px;
-            color: grey;
-        }
-        .nav-right{
-            margin-right: 10px;
-        }
-        .nav-right a{
-            height: 100%;
-            text-decoration: none;
-            margin-left: 10px;
-            margin-top: 0px;
-            color: grey;
-            padding: 8px;
-            font-size: 20px;
-            font-weight: 500;
-        }
-        .nav-right a:hover{
+            background: linear-gradient(to right, #2C003E, #000000);
             color: white;
-            background: grey;
-            box-shadow: 0 0 7px black;
+            padding: 10px;
+            z-index: 1000;
+          }
+        
+          /* Hide nav menu by default */
+          .nav-menu {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 70%;
+            background: linear-gradient(to bottom, #2C003E, #000000);
+            padding: 20px 20px 20px 15px;
+            z-index: 1001;
+          }
+        
+          /* Toggle button (hamburger) */
+          .hamburger {
+            font-size: 28px;
+            cursor: pointer;
+            user-select: none;
+            z-index: 1002;
+            position: relative;
+          }
+        
+          /* Hide actual checkbox */
+          .nav-toggle {
+            display: none;
+          }
+        
+          /* Overlay for closing */
+          .nav-overlay {
+            display: none;
+          }
+        
+          .nav-toggle:checked ~ .nav-overlay {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+          }
+        
+          /* Show menu when checked */
+          .nav-toggle:checked ~ .nav-menu {
+            display: flex;
+          }
+        
+          /* Links */
+          .nav-menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+          }
+        
+          .nav-menu a:hover {
+            text-decoration: underline;
+            color: #FFD43B;
+          }
+        
+          .mobile-nav .navleft {
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 0px;
+          }
         }
-    """, unsafe_allow_html=True
-)
+    </style>
+""", unsafe_allow_html=True)
+
 after_nav = st.container()
 with after_nav:
     col1, col2 = st.columns([4,6])
@@ -76,7 +201,7 @@ with after_nav:
         st.image("images/prof.jpg")
     with col2:
         st.markdown("""
-            <div class="bout-left">
+            <div id="homie" class="bout-left">
                 <p>
                     <h1>Hi,</h1> I'm Sammy, computer science student<br>Having great Interest in AI research and Web-Development.
                 </p>
@@ -158,7 +283,7 @@ with top:
     st.title("About Me")
     st.markdown("""
         <div class="about-cuz">
-            <div class="ab-left"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/peak1.jpg"></img></div>
+            <div id="about" class="ab-left"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/peak1.jpg"></img></div>
             <div class="ab-middle">
             </div>
             <div class="ab-right">
@@ -225,6 +350,7 @@ with top:
                 linear-gradient: linear-gradient(to bottom right, #2C003E, #000000);
             }
             .ab{
+                cursor: pointer;
                 background: linear-gradient(to bottom right, #2C003E, #000000);
                 border-radius: 12px;
                 padding: 0 15px;
@@ -279,7 +405,7 @@ with portfolio:
         st.write("")
     st.title("Portfolio")
     st.markdown("""
-        <div class="portfolio">
+        <div id="portfolio" class="portfolio">
             <div class="work">
                 <img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ai1.jpg">
                 <div class="layer">
@@ -316,6 +442,7 @@ with portfolio:
                 margin-top: 20px;
             }
             .work{
+                cursor: pointer;
                 border-radius: 10px;
                 position: relative;
                 overflow: hidden;
@@ -397,36 +524,82 @@ with bottom:
     for i in range(3):
         st.write("")
     st.title("Lets Talk")
-    st.markdown("""
-        <div class="Talk">
-            <div class="talk-left">
-                <div class="socials"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/git1.jpg"></div>
-                <div class="socials"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/wat1.png"></div>
-                <div class="socials"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ig.jpg"></div>
-                <div class="socials"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/snap.jpg"></div>
+    col1, col2 = st.columns([1,2])
+    with col1:
+        st.markdown("""
+            <div id="contact" class="left">
+                <div class="talk-left">
+                        <br><br>
+                        <a href="https://github.com/Samuels232"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/git1.jpg" width="80px"></a>
+                        <a href="https://wa.me/0274708989"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/wat2.jpg" width="80px"></a> 
+                        <a href="https://www.instagram.com/sammyspear28"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/ig.jpg" width="80px"></a>
+                        <a href="https://www.snapchat.com/add/lilcode9885"><img src="http://raw.githubusercontent.com/Samuels232/portfolio/main/images/snap.jpg" width="80px"></a>
+                </div>
+                <div class="talk-middle" style=""></div>
             </div>
-            <div class="talk-right">
-                <form id="contactForm">
-                    <input type="text" id="name" placeholder="Your name" required>
-                    <textarea id="message" placeholder="Your message" required>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-        
-        <style>
-            .Talk{
+            <style>
+                .left{
                 display: flex;
-            }
-            .talk-left{
-                flex-basis: 20%
-            }
-            .socials{
-                margin: 5px;
-            }
-            .socials img{
-                width: 70px;
-                height: 70px;
-            }
-        </style>
-    """,unsafe_allow_html=True)
+                justify-content: space-between;
+                align-items: center;              
+                }
+                .talk-left{
+                    display: flex;
+                    flex-direction: column;
+                }
+                .talk-left a{
+                    transition: all 0.5s;
+                }
+                .talk-left a:hover{
+                    transform: scale(1.1);
+                }
+                .talk-left a img{
+                    border-radius: 50px;
+                    margin: 5px;
+                }
+                .talk-middle{
+                border-left: 2px solid white; 
+                height: 400px;
+                margin-top: 10%; 
+                margin-right: 15%;   
+                }
+                @media (max-width: 760px) and (min-width: 344px){
+                    .left{
+                        display: flex;
+                    }
+                    .talk-left{
+                        display: flex;
+                        flex-direction: row;
+                        margin-left: 5px;
+                    }
+                    .talk-middle{
+                        display: none;
+                    }
+                }
+            </style>    
+        """,unsafe_allow_html=True)
+
+    with col2:
+        for i in range(1):
+            st.write("")
+            i+=1
+        with st.form("my_form"):
+            name = st.text_input("Your name")
+            email = st.text_input("Email")
+            message = st.text_area(
+                "Your message",
+                height=200,
+                max_chars=500,
+                key="feedback_box"
+            )
+            submitted = st.form_submit_button("Submit")
+body = ""
+if submitted:
+    if name and email and message:
+        body = body + name + "\n" + email + "\n" + message
+        st.success(f"Thanks for your feedback, {name}!😊")
+    else:
+        st.error("Please fill in all fields before submitting.")
+
+body = body.encode("Utf-8")
+em.send_email(body)
