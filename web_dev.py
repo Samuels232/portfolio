@@ -597,9 +597,9 @@ body = ""
 if submitted:
     if name and email and message:
         body = body + name + "\n" + email + "\n" + message
+        body = body.encode("Utf-8")
+        em.send_email(body)
         st.success(f"Thanks for your feedback, {name}!😊")
     else:
         st.error("Please fill in all fields before submitting.")
 
-body = body.encode("Utf-8")
-em.send_email(body)
